@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 using namespace std;
 
 // Definition for a Node.
@@ -17,6 +18,18 @@ public:
         : val(_val), left(_left), right(_right), next(_next) {}
 };
 
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
+// Q116. Populating Next Right Pointers in Each Node
+// Q117. Populating Next Right Pointers in Each Node II
 class Solution {
 private:
     // Q116. Populating Next Right Pointers in Each Node
@@ -75,17 +88,44 @@ public:
     
 };
 
+// Q106. Construct Binary Tree from Inorder and Postorder Traversal
+class Solution106 {
+private:
+    TreeNode* RecursiveBuildTree(vector<int>& inorder, vector<int>& postorder, int _beginIndex, int _endIndex, int _currentPosIndex)
+    {
+        if(_currentPosIndex < 0 || _currentPosIndex >= postorder.size())
+            return NULL;
+        
+        //cout << "[Begin]: " << _beginIndex << ", [End]: " << _endIndex << ", [current]: " << _currentPosIndex << endl; 
+        for(int i = _endIndex-1; i >= _beginIndex; i--)
+        {
+            if(inorder[i] == postorder[_currentPosIndex])
+            {
+                TreeNode* newNode = new TreeNode();
+                newNode->val = inorder[i];
+                //cout << "Created -> " << newNode->val << endl;
+                newNode->left = RecursiveBuildTree(inorder, postorder, _beginIndex, i, _currentPosIndex - (_endIndex - i));
+                newNode->right = RecursiveBuildTree(inorder, postorder, i, _endIndex, _currentPosIndex - 1);
+                return newNode;
+            }
+        }
+
+        return NULL;
+    }
+
+public:
+    TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
+        return RecursiveBuildTree(inorder, postorder, 0, inorder.size(), postorder.size()-1);
+    }
+};
+
 int main()
 {
-    Node* main = new Node();
-    Node* left = new Node();
-    Node* right = new Node();
+    vector<int> inorder = {24, 11, 9, 23, 12, 26, 3, 15, 20, 7};
+    vector<int> posorder = {24, 11, 23, 26, 12, 9, 15, 7, 20, 3};
 
-    main->left = left;
-    main->right = right;
-
-    Solution s;
-    s.connect(main);
-
+    Solution106 s;
+    s.buildTree(inorder, posorder);
+    
     return 0;
 }
