@@ -119,6 +119,50 @@ public:
     }
 };
 
+class Solution110 {
+    private:
+    int m_minValue;
+    int m_maxValue;
+
+    void RecursiveCompare(TreeNode* _currentNode, int _depth)
+    {
+        if(_currentNode == NULL)
+        {
+            if(_depth > m_maxValue) 
+            {
+                m_maxValue = _depth;
+                cout << "UpdateMax: on value: ";
+            }
+            if(_depth < m_minValue)
+            {
+                m_minValue = _depth;
+                cout << "UpdateMin: on value: ";
+            } 
+        }
+        else
+        {
+            
+
+            RecursiveCompare(_currentNode->left, _depth + 1);
+            if(_currentNode->left == NULL)
+                cout << _currentNode->val << endl;
+            RecursiveCompare(_currentNode->right, _depth + 1);
+            if(_currentNode->right == NULL)
+                cout << _currentNode->val << endl;
+        }
+    }
+
+    public:
+    bool isBalanced(TreeNode* root) {
+        m_minValue = 2147483647;
+        m_maxValue = -2147483648;
+
+        RecursiveCompare(root, 0);
+        //cout << "Max: " << m_maxValue << ", Min: " << m_minValue << endl;
+        return (m_maxValue - m_minValue) <= 1;
+    }
+}
+
 int main()
 {
     vector<int> inorder = {24, 11, 9, 23, 12, 26, 3, 15, 20, 7};
