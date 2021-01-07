@@ -161,7 +161,7 @@ class Solution110 {
         //cout << "Max: " << m_maxValue << ", Min: " << m_minValue << endl;
         return (m_maxValue - m_minValue) <= 1;
     }
-}
+};
 
 int main()
 {
