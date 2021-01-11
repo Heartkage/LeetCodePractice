@@ -4,30 +4,41 @@ using namespace std;
 
 class Solution128 {
 private:
+
+    int Partition(vector<int>& _nums, int _startIndex, int _endIndex)
+    {
+        int pivot = _nums[_endIndex];
+        int i = _startIndex - 1;
+
+        for(int j = _startIndex; j < _endIndex; j++)
+        {
+            if(_nums[j] <= pivot)
+            {
+                i++;
+                swap(_nums[i], _nums[j]);
+            }
+        }
+
+        int middleIndex = i+1;
+        swap(_nums[middleIndex], _nums[_endIndex]);
+
+        return middleIndex;
+    }
+
     void QuickSort(vector<int>& _nums, int _startIndex, int _endIndex)
     {
-        if(_startIndex >= _endIndex)
-            return;
-
-        int pivot = _nums[_startIndex];
-        int i = _startIndex, j = _endIndex - 1;
-        while(j > i)
+        if(_startIndex < _endIndex)
         {
-            while((i < j) && (_nums[i] < pivot)) i++;
-            while((j > i) && (_nums[j] > pivot)) j--;
+            int middleIndex = Partition(_nums, _startIndex, _endIndex);
 
-            if(j > i)
-                swap(_nums[i], _nums[j]);
-            else
-                swap(_nums[i], _nums[_startIndex]);
+            QuickSort(_nums, _startIndex, middleIndex - 1);
+            QuickSort(_nums, middleIndex + 1, _endIndex);
         }
-        QuickSort(_nums, _startIndex, i);
-        QuickSort(_nums, i+1, _endIndex);
     }
 
 public:
     int longestConsecutive(vector<int>& nums) {
-        QuickSort(nums, 0, nums.size());
+        QuickSort(nums, 0, nums.size()-1);
 
         for(auto i : nums)
             cout << nums[i] << " ";
@@ -39,7 +50,9 @@ public:
             int current = 1;
             for(auto i = 1; i < nums.size(); i++)
             {
-                if(nums[i-1]+1 == nums[i])
+                if(nums[i-1] == nums[i])
+                    continue;
+                else if(nums[i-1]+1 == nums[i])
                     current++;
                 else
                 {
@@ -48,6 +61,9 @@ public:
                     current = 1;
                 }
             }
+
+            if(current > answer)
+                answer = current;
         }
         return answer;
     }
