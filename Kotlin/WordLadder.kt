@@ -10,7 +10,7 @@ class Solution {
         {
             val regexCharArray = targetWord.toCharArray()
             regexCharArray[i] = '.'
-            val regexString : String = regexCharArray.concatToString()
+            val regexString : String = String(regexCharArray)
             //println("Modified Word: $regexString")
             val r1 = Regex(regexString)
 
@@ -45,33 +45,72 @@ class Solution {
         val routeDistance : MutableMap<String, Int> = mutableMapOf()
 
         beginWord.addPath(wordList, availableRoute);
-        routeTrace[beginWord] = true
+        routeTrace[beginWord] = false
         routeDistance[beginWord] = 0
         wordList.forEach{
-            it.addPath(wordList, availableRoute)
-            routeTrace[it] = false
-            routeDistance[it] = Int.MAX_VALUE
+            if(it != beginWord)
+            {
+                it.addPath(wordList, availableRoute)
+                routeTrace[it] = false
+                routeDistance[it] = Int.MAX_VALUE
+            }
         }
 
-        PrintRoutes(availableRoute)
+        //PrintRoutes(availableRoute)
         var searchList : ArrayList<String> = arrayListOf();
         searchList.add(beginWord)
 
-
-        while(!searchList.isEmpty())
+        var foundTarget : Boolean = false
+        while(searchList.isNotEmpty())
         {
+            // Find Shortest Distance
+            var shortestPath : String = ""
+            var shortestDistance = Int.MAX_VALUE
+            searchList.forEach{
+                if(!routeTrace[it]!!)
+                {
+                    val targetDistance = routeDistance[it] ?: Int.MAX_VALUE
+                    if(targetDistance < shortestDistance)
+                    {
+                        shortestDistance = targetDistance
+                        shortestPath = it
+                    }
+                }
+            }
 
+            if(shortestPath != "")
+            {
+                searchList.remove(shortestPath)
+                routeTrace[shortestPath] = true
+
+                availableRoute[shortestPath]!!.forEach {
+                    if(!routeTrace[it]!!)
+                    {
+                        val nextDistance = shortestDistance + 1
+                        if (routeDistance[it]!! > nextDistance)
+                            routeDistance[it] = nextDistance
+                        searchList.add(it)
+                        if(it == endWord)
+                            foundTarget = true
+                    }
+                }
+            }
+            else
+                break
+
+            if(foundTarget)
+                break
         }
 
-        return 0
+        return if (foundTarget) routeDistance[endWord]!!+1 else 0
     }
 }
 
 fun main() {
     val s : Solution = Solution()
 
-    val wordList : List<String> = listOf("hot","dot","dog","lot","log","cog")
 
-    s.ladderLength("hit", "cog", wordList)
+    val wordList : List<String> = listOf("hot","dog","cog","pot","dot")
+    println(s.ladderLength("hot", "dog", wordList))
 
 }
