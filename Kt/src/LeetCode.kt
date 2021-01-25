@@ -3,11 +3,14 @@
      var right: TreeNode? = null
 }
 
-class Solution {
-
-}
+ inline fun Array<CharArray>.printAll(lambda : () -> Unit)
+ {
+     lambda.invoke()
+     this.forEach {
+         println(it)
+     }
+ }
 
 fun main() {
-    val solution : Solution
 
 }
