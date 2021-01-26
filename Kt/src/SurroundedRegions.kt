@@ -3,13 +3,17 @@ class Solution {
     private val x_direction : List<Int> = listOf(-1, 0, 1, 0)
     private val y_direction : List<Int> = listOf(0, -1, 0, 1)
 
-    private var m_visitedPoints : MutableSet<Pair<Int, Int>> = mutableSetOf()
+    private var m_visitedPoints : MutableList<BooleanArray> = mutableListOf()
     private var m_visitedPath : MutableSet<Pair<Int, Int>> = mutableSetOf()
     private var foundExit : Boolean = false
     fun solve(board: Array<CharArray>): Unit {
+        board.forEach {
+            m_visitedPoints.add(BooleanArray(it.count()) { false })
+        }
+
         for(y in 0 until board.count()){
             for(x in 0 until board[y].count()){
-                if(board[y][x] == 'O' && !m_visitedPoints.contains(Pair(x, y))){
+                if(board[y][x] == 'O' && !m_visitedPoints[y][x]){
                     foundExit = false
                     m_visitedPath.clear()
                     dfs(board, x, y)
@@ -25,11 +29,11 @@ class Solution {
 
     fun dfs(_board: Array<CharArray>, _x: Int, _y: Int) : Unit{
         val point : Pair<Int, Int> = Pair(_x, _y)
-        if(m_visitedPoints.contains(point))
+        if(m_visitedPoints[_y][_x])
             return
         else
         {
-            m_visitedPoints.add(point)
+            m_visitedPoints[_y][_x] = true
             m_visitedPath.add(point)
         }
 
