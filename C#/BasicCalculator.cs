@@ -1,4 +1,6 @@
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System;
 
 public class BasicCalculator {
 
@@ -293,10 +295,12 @@ public class BasicCalculator {
         return isValid;
     }
     
-    public int Calculate(string s) {
+    public double Calculate(string s) {
         
         Regex calculatorRx = new Regex(@"^[0-9xX \(\)\.\^\+\-\*/]+$", RegexOptions.Compiled);
         BasicStringCalculator(s, calculatorRx, 1, out double answer);
-        return (int)answer;
+        return answer;
     }
+
+    
 }
