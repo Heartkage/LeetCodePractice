@@ -208,8 +208,8 @@ public class BasicCalculator {
 
                             if (word == '-')
                             {
-                                // Exist a number in front, then add it as a negative value
-                                if (!isFirstNum)
+                                // Exist a number in front and no sign, then add it as a negative value
+                                if (!isFirstNum && !hasSign)
                                 {
                                     hasSign = true;
                                     signStack.Push('+');
