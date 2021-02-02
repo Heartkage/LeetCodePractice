@@ -5,8 +5,6 @@ public class CurrencyExchange
 {
     public bool ExchangeExceed(List<int> _currencyType, Dictionary<int, int> _typeAmount, int _targetAmount, ref Dictionary<int, int> _answer)
     {
-        if(_answer == null)
-            _answer = new Dictionary<int, int>();
         _answer.Clear();
 
         // nLog(n), n = size of _currentType
@@ -57,4 +55,25 @@ public class CurrencyExchange
 
         return _targetAmount <= 0;
     }
+
+    public void ExchangeInLimit(List<int> _currencyType, Dictionary<int, int> _typeAmount, int _targetAmount, ref Dictionary<int, int> _answer)
+    {
+        _answer.Clear();
+
+        // nLog(n), n = size of _currentType
+        _currencyType.Sort((x, y) => y.CompareTo(x));
+        
+        // top to down fill up
+        foreach(int currency in _currencyType)
+        {
+            int chooseAmount = _targetAmount / currency;
+            if(chooseAmount > 0 && _typeAmount.ContainsKey(currency))
+            {
+                chooseAmount = (chooseAmount > _typeAmount[currency]) ? _typeAmount[currency] : chooseAmount;
+                _answer.Add(currency, chooseAmount);
+                _targetAmount -= currency * chooseAmount;
+            }
+        }
+    }
+
 }
