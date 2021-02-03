@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Uitilities;
+using Uitilities.Number;
 
 namespace CSharp
 {
@@ -38,7 +38,7 @@ namespace CSharp
             long a = 36545480;
         
             Console.WriteLine($"Before: {a.InStandard()}");
-            Console.WriteLine($"After: {a.ToKMBP()}");
+            Console.WriteLine($"After: {a.ToKMB()}");
             Console.WriteLine($"After: {((int)a).ToTime()}");
         }
     }

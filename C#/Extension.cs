@@ -1,4 +1,4 @@
-namespace Uitilities
+namespace Uitilities.Number
 {
     public static class NumberExtension
     { 
@@ -32,10 +32,12 @@ namespace Uitilities
                 return string.Format("{0:##,,.#M}", _num);
             else if(_num < 1000000000)          // 949M
                 return string.Format("{0:###,,M}", _num);
+            else if(_num <= int.MaxValue)       // 9.49B
+                return string.Format("{0:#,,,.##B}", _num);
             else
                 return string.Format(StandardForm, _num);
         }
-        public static string ToKMBP(this long _num)
+        public static string ToKMB(this long _num)
         {
             if(_num == 1000)                    // 1K
                 return "1K";
@@ -57,14 +59,20 @@ namespace Uitilities
                 return string.Format("{0:##,,,.#B}", _num);
             else if(_num < 1000000000000)       // 949B
                 return string.Format("{0:###,,,B}", _num);
-            else if(_num < 10000000000000)      // 9.49P
-                return string.Format("{0:#,,,,.##P}", _num);
-            else if(_num < 100000000000000)     // 94.9P
-                return string.Format("{0:##,,,,.#P}", _num);
-            else if(_num < 1000000000000000)    // 949P
-                return string.Format("{0:###,,,,P}", _num);
+            else if(_num < 10000000000000)      // 9.49T
+                return string.Format("{0:#,,,,.##T}", _num);
+            else if(_num < 100000000000000)     // 94.9T
+                return string.Format("{0:##,,,,.#T}", _num);
+            else if(_num < 1000000000000000)    // 949T
+                return string.Format("{0:###,,,,T}", _num);
+            else if(_num < 10000000000000000)   // 9.49P
+                return string.Format("{0:#,,,,,.##P}", _num);
+            else if(_num < 100000000000000000)  // 94.9P
+                return string.Format("{0:##,,,,,.#P}", _num);
+            else if(_num < 1000000000000000000) // 949P
+                return string.Format("{0:###,,,,,P}", _num);
             else
-                return string.Format(StandardForm, _num);
+                return string.Format("{0:#,,,,,,.##E}", _num);
         }
     
 
