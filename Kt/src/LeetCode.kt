@@ -8,6 +8,6 @@ class Solution {
 }
 
 fun main() {
-    val solution : Solution
+    val solution : Solution = Solution()
 
 }
