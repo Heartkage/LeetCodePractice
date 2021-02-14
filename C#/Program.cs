@@ -37,9 +37,20 @@ namespace CSharp
 
             long a = 36545480;
         
-            Console.WriteLine($"Before: {a.InStandard()}");
-            Console.WriteLine($"After: {a.ToKMB()}");
-            Console.WriteLine($"After: {((int)a).ToTime()}");
+            //Console.WriteLine($"Before: {a.InStandard()}");
+            //Console.WriteLine($"After: {a.ToKMB()}");
+            //Console.WriteLine($"After: {((int)a).ToTime()}");
+
+            RegexTest test = new RegexTest();
+            List<string> words = new List<string>();
+            words.Add("apples");
+            words.Add("apple");
+            words.Add("pen");
+            // words.Add("sand");
+            // words.Add("and");
+            // words.Add("cat");
+
+            
         }
     }
 }
