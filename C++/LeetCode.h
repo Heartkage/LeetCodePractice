@@ -37,8 +37,11 @@ namespace LeetCode
 
     class Solution110
     {
+        int recursiveCheckHeight(TreeNode *);
     public:
         bool isBalanced(TreeNode*);
+
+        void test();
     };
 
     class Solution116
