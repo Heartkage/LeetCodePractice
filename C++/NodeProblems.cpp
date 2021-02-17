@@ -46,7 +46,7 @@ int Solution110::recursiveCheckHeight(TreeNode *currentNode)
         else if(abs(leftHeight - rightHeight) > 1)
             return -1;
         else
-            return max(leftHeight, rightHeight) + 1;
+            return (leftHeight < rightHeight) ? rightHeight + 1 : leftHeight + 1;
     }
 }
 bool Solution110::isBalanced(TreeNode* root) {
