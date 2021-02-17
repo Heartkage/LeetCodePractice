@@ -58,6 +58,19 @@ using namespace NodeProblem;
 
 namespace LeetCode
 { 
+    class Solution42 : public SupportBase {
+    public:
+        int trap(vector<int>&);
+        void test() override;
+    };
+
+    class Solution60 : public SupportBase {
+        int findAvailableIndex(vector<bool>&, int);
+    public:
+        string getPermutation(int n, int k);
+        void test() override;
+    };
+
     class Solution106
     {
         TreeNode* RecursiveBuildTree(vector<int>&, vector<int>&, int, int, int);
@@ -92,14 +105,9 @@ namespace LeetCode
     };
 
     class Solution143
-    {
+    {  
     public:
         void reorderList(ListNode*);
     };
-
-    class Solution42 : public SupportBase {
-    public:
-        int trap(vector<int>&);
-        void test() override;
-    };
+    
 }
