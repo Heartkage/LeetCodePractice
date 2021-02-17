@@ -2,6 +2,7 @@
 
 using namespace std;
 using namespace LeetCode;
+using namespace NodeProblem;
 
 #pragma region Q106. Construct Binary Tree from Inorder and Postorder Traversal
 TreeNode* Solution106::RecursiveBuildTree(vector<int>& inorder, vector<int>& postorder, int _beginIndex, int _endIndex, int _currentPosIndex)
@@ -123,5 +124,39 @@ Node* Solution117::connect(Node* root) {
     m_root = root;
     RecursiveConnectFromHead(root, 0);
     return root;
+}
+#pragma endregion
+
+#pragma region Q143. Reorder List
+void Solution143::reorderList(ListNode* head)
+{
+    vector<ListNode*> reorder;
+    ListNode *current = head;
+    while(current != nullptr)
+    {
+        reorder.push_back(current);
+        current = current->next;
+    }
+
+    int frontIndex = 1;
+    int backIndex = reorder.size()-1;
+    current = head;
+    for(int i = 1; i < reorder.size(); i++)
+    {
+        if(i & 1)
+        {
+            current->next = reorder[backIndex];
+            backIndex--;
+            current = current->next;
+        }
+        else
+        {
+            current->next = reorder[frontIndex];
+            current = current->next;
+            frontIndex++;
+        }
+    }
+    if(current != nullptr)
+    current->next = nullptr;
 }
 #pragma endregion

@@ -1,8 +1,11 @@
 #include<iostream>
 #include<vector>
+#include<map>
+#include<queue>
+
 using namespace std;
 
-namespace LeetCode
+namespace NodeProblem
 {
     struct TreeNode {
         int val;
@@ -11,6 +14,14 @@ namespace LeetCode
         TreeNode() : val(0), left(nullptr), right(nullptr) {}
         TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
         TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+    };
+
+    struct ListNode {
+        int val;
+        ListNode *next;
+        ListNode() : val(0), next(nullptr) {}
+        ListNode(int x) : val(x), next(nullptr) {}
+        ListNode(int x, ListNode *next) : val(x), next(next) {}
     };
 
     class Node {
@@ -27,7 +38,12 @@ namespace LeetCode
         Node(int _val, Node* _left, Node* _right, Node* _next)
             : val(_val), left(_left), right(_right), next(_next) {}
     };
+}
+using namespace NodeProblem;
 
+namespace LeetCode
+{
+    
     class Solution106
     {
         TreeNode* RecursiveBuildTree(vector<int>&, vector<int>&, int, int, int);
@@ -59,5 +75,11 @@ namespace LeetCode
         void RecursiveConnectFromHead(Node*, int _depth);
     public:
         Node* connect(Node*);
+    };
+
+    class Solution143
+    {
+    public:
+        void reorderList(ListNode*);
     };
 }
