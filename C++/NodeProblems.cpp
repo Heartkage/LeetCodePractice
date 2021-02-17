@@ -157,6 +157,6 @@ void Solution143::reorderList(ListNode* head)
         }
     }
     if(current != nullptr)
-    current->next = nullptr;
+        current->next = nullptr;
 }
 #pragma endregion

@@ -5,8 +5,8 @@ using namespace LeetCode;
 
 int main()
 {
-    Solution110 s110;
-    s110.test();
+    Solution42 s;
+    s.test();
 
     return 0;
 }

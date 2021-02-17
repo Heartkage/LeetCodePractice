@@ -2,8 +2,23 @@
 #include<vector>
 #include<map>
 #include<queue>
+#include<ctime>
+#include<stack>
 
 using namespace std;
+
+namespace Support
+{
+    class SupportBase
+    {
+        time_t m_startTime;
+    public:
+        virtual void test();
+        virtual void endTest();
+    };
+}
+
+using namespace Support;
 
 namespace NodeProblem
 {
@@ -42,8 +57,7 @@ namespace NodeProblem
 using namespace NodeProblem;
 
 namespace LeetCode
-{
-    
+{ 
     class Solution106
     {
         TreeNode* RecursiveBuildTree(vector<int>&, vector<int>&, int, int, int);
@@ -81,5 +95,11 @@ namespace LeetCode
     {
     public:
         void reorderList(ListNode*);
+    };
+
+    class Solution42 : public SupportBase {
+    public:
+        int trap(vector<int>&);
+        void test() override;
     };
 }
