@@ -5,7 +5,7 @@ using namespace LeetCode;
 
 int main()
 {
-    Solution60 s;
+    Solution147 s;
     s.test();
 
     return 0;

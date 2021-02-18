@@ -160,3 +160,83 @@ void Solution143::reorderList(ListNode* head)
         current->next = nullptr;
 }
 #pragma endregion
+
+#pragma region Q147. Insertion Sort List
+ListNode* Solution147::reverseList(ListNode* head)
+{
+    ListNode* current = head;
+    ListNode* next = current->next;
+    current->next = nullptr;
+    while(next)
+    {
+        ListNode* nextNext = next->next;
+        next->next = current;
+        current = next;
+        next = nextNext;
+    }
+
+    return current;
+}
+
+ListNode* Solution147::insertionSortList(ListNode* head)
+{
+    if(head == nullptr)
+        return nullptr;
+
+    ListNode *end = head;
+    ListNode *nextNode = head->next;
+    end->next = nullptr;
+    while(nextNode)
+    {
+        ListNode *current = nextNode;
+        nextNode = nextNode->next;
+        current->next = nullptr;
+
+        ListNode *lastNode = nullptr;
+        ListNode *currentEnd = end;
+        do
+        {
+            if(current->val > currentEnd->val)
+            {
+                if(lastNode != nullptr)
+                    lastNode->next = current;
+                else
+                    end = current;
+                    
+                current->next = currentEnd;
+                break;
+            }
+            else
+            {
+                lastNode = currentEnd;
+                currentEnd = currentEnd->next;
+                if(currentEnd == nullptr)
+                    lastNode->next = current;
+            }
+        } while (currentEnd);
+    }
+    
+    return reverseList(end);
+}
+void Solution147::test()
+{
+    ListNode *a = new ListNode(4);
+    ListNode *b = new ListNode(2);
+    ListNode *c = new ListNode(1);
+    ListNode *d = new ListNode(3);
+    ListNode *e = new ListNode(3);
+
+    //a->next = b;
+    b->next = c;
+    c->next = d;
+    d->next = e;
+
+    ListNode *head = insertionSortList(a);
+    ListNode *current = head;
+    while(current)
+    {
+        cout << current->val << endl;
+        current = current->next;
+    }
+}
+#pragma endregion

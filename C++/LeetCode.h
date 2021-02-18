@@ -110,4 +110,11 @@ namespace LeetCode
         void reorderList(ListNode*);
     };
     
+    class Solution147
+    {
+        ListNode* reverseList(ListNode *head);
+    public:
+        ListNode* insertionSortList(ListNode* head);
+        void test();
+    };
 }
