@@ -117,4 +117,12 @@ namespace LeetCode
         ListNode* insertionSortList(ListNode* head);
         void test();
     };
+
+    class Solution148
+    {
+        int Partition(ListNode* leftHead, int leftIndex, int rightIndex);
+        void QuickSort(ListNode* leftHead, int leftIndex, int rightIndex);
+    public:
+        ListNode* sortList(ListNode* head);
+    };
 }
