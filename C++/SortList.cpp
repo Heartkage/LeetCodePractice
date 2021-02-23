@@ -6,30 +6,32 @@ using namespace LeetCode;
 int Solution148::Partition(ListNode* head, int leftIndex, int rightIndex)
 {
     ListNode *endNode = head;
-    ListNode *beginNode = head;
+    ListNode *beginNode;
     for(int i = 0; i < rightIndex; i++)
     {
-        if(i == leftIndex-1)
+        if(i == leftIndex)
             beginNode = endNode;
-
+            
         endNode = endNode->next;
     }
 
     int pivot = endNode->val;
-    ListNode *current = beginNode->next;
+    ListNode *current = beginNode;
     int middleIndex = leftIndex - 1;
     for(int i = leftIndex; i < rightIndex; i++)
     {
         if(current->val <= pivot)
         {
-            beginNode = beginNode->next;
+            if(middleIndex != (leftIndex-1))
+                beginNode = beginNode->next;
             middleIndex++;
             swap(beginNode->val, current->val);
         }
         current = current->next;
     }
 
-    beginNode = beginNode->next;
+    if(middleIndex != (leftIndex-1))
+        beginNode = beginNode->next;
     middleIndex++;
     swap(beginNode->val, endNode->val);
     return middleIndex;
