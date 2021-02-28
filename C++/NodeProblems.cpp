@@ -240,3 +240,38 @@ void Solution147::test()
     }
 }
 #pragma endregion
+
+#pragma region Q160. Intersection of Two Linked Lists
+ListNode* Solution160::getIntersectionNode(ListNode *headA, ListNode *headB) {
+    int length = 0;
+    ListNode *current = headA;
+    while(current != nullptr)
+    {
+        length++;
+        current = current->next;
+    }
+    current = headB;
+    while(current != nullptr)
+    {
+        length--;
+        current = current->next;
+    }
+
+    if(length > 0)
+        while(length--) headA = headA->next;
+    else
+        while(length++) headB = headB->next;
+
+    while(headA)
+    {
+        if(headA == headB)
+            return headA;
+        else
+        {
+            headA = headA->next;
+            headB = headB->next;
+        }
+    }
+    return nullptr;
+}
+#pragma region 

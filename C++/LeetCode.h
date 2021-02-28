@@ -125,4 +125,9 @@ namespace LeetCode
     public:
         ListNode* sortList(ListNode* head);
     };
+
+    class Solution160 {
+    public:
+        ListNode *getIntersectionNode(ListNode *headA, ListNode *headB);
+    };
 }
