@@ -5,7 +5,7 @@
 using namespace std;
 
 class MinStack {
-    vector<int> m_minList;
+    stack<int> m_minStack;
     stack<int> m_myStack;
 public:
     /** initialize your data structure here. */
@@ -15,28 +15,13 @@ public:
     
     void push(int x) {
         m_myStack.push(x);
-
-        int index;
-        for(index = 0; index < m_minList.size(); index++)
-            if(m_minList[index] > x)
-                break;
-        cout << "Insert index: " << index << endl;
-        
-        m_minList.insert(m_minList.begin()+index, x);
+        if(m_minStack.empty() || x <= m_minStack.top())
+            m_minStack.push(x);
     }
     
     void pop() {
-        int x = top();
-        cout << "Top Value: " << x << endl;
-        for(int index = 0; index < m_minList.size(); index++)
-        {
-            if(m_minList[index] == x)
-            {
-                m_minList.erase(m_minList.begin() + index);
-                break;
-            }
-        }
-
+        if(m_minStack.top() == m_myStack.top())
+            m_minStack.pop();
         m_myStack.pop();
     }
     
@@ -45,7 +30,7 @@ public:
     }
     
     int getMin() {
-        return *(m_minList.begin());
+        return m_minStack.top();
     }
 };
 
