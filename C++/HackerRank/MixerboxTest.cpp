@@ -24,7 +24,12 @@ int main(void)
                 signStack.push('+');
             else if(input[i] == ')')
             {
-                if(i > 0 && input[i - 1] == '(')
+                if(signStack.empty())
+                {
+                    valid = false;
+                    break;
+                }
+                else if(i > 0 && input[i - 1] == '(')
                 {
                     numberStack.push(0);
                     signStack.pop();
