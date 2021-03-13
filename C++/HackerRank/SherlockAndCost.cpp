@@ -4,7 +4,6 @@ using namespace std;
 
 // Complete the cost function below.
 int cost(vector<int> B) {
-
     int low = 0;
     int high = 0;
 
