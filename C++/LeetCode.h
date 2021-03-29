@@ -78,6 +78,14 @@ namespace LeetCode
         TreeNode* buildTree(vector<int>&, vector<int>&);
     };
 
+    class Solution109
+    {
+        TreeNode* recursivelyCreateBST(ListNode* head, int length);
+    public:
+        TreeNode* sortedListToBST(ListNode* head);
+        void test();
+    };
+
     class Solution110
     {
         int recursiveCheckHeight(TreeNode *);

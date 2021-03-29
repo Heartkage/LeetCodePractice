@@ -32,6 +32,56 @@ TreeNode* Solution106::buildTree(vector<int>& inorder, vector<int>& postorder) {
 }
 #pragma endregion
 
+#pragma region Q109. Convert Sorted List to Binary Search Tree
+TreeNode* Solution109::recursivelyCreateBST(ListNode* head, int length)
+{
+    int midLength = length / 2;
+    ListNode *midNode = head;
+    for(int i = 0; i < midLength; i++)
+        midNode = midNode->next;
+
+    TreeNode *newNode = new TreeNode(midNode->val);
+    
+    if(midLength > 0)
+        newNode->left = recursivelyCreateBST(head, midLength);
+    if((length - midLength-1) > 0)
+        newNode->right = recursivelyCreateBST(midNode->next, length - midLength-1);
+
+    return newNode;
+}
+
+TreeNode* Solution109::sortedListToBST(ListNode* head)
+{
+    int length = 0;
+    ListNode *temp = head;
+    while(temp)
+    {
+        temp = temp->next;
+        length++;
+    }
+    
+    if(head)
+        return recursivelyCreateBST(head, length);
+    else
+        return nullptr;
+}
+
+void Solution109::test()
+{
+    ListNode *a = new ListNode(-10);
+    ListNode *b = new ListNode(-3);
+    ListNode *c = new ListNode(0);
+    ListNode *d = new ListNode(5);
+    ListNode *e = new ListNode(9);
+    a->next = b;
+    b->next = c;
+    c->next = d;
+    d->next = e;
+
+    sortedListToBST(a);
+}
+#pragma endregion
+
 #pragma region Q110. Balanced Binary Tree
 int Solution110::recursiveCheckHeight(TreeNode *currentNode)
 {

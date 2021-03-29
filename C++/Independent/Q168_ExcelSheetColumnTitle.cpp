@@ -18,6 +18,13 @@ public:
 
         return answer;
     }
+
+    int titleToNumber(string columnTitle) {
+        int answer = 0;
+        for(int i = columnTitle.size()-1; i >= 0; i--)
+            answer += (columnTitle[i] - 64) * pow(26, columnTitle.size() - 1 - i);
+        return answer;
+    }
 };
 
 int main(void)
