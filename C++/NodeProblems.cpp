@@ -274,4 +274,31 @@ ListNode* Solution160::getIntersectionNode(ListNode *headA, ListNode *headB) {
     }
     return nullptr;
 }
-#pragma region 
+#pragma endregion 
+
+#pragma region Q173. Binary Search Tree Iterator
+void Solution173::TraverseTree(TreeNode* current){
+    if(current == nullptr)
+        return;
+    
+    TraverseTree(current->left);
+    m_numberQueue.push(current->val);
+    TraverseTree(current->right);
+}
+
+Solution173::BSTIterator(TreeNode* root) {
+    TraverseTree(root);
+}
+
+int Solution173::next()
+{
+    int val = m_numberQueue.front();
+    m_numberQueue.pop();
+    return val;
+}
+
+bool Solution173::hasNext()
+{
+    return !m_numberQueue.empty();
+}
+#pragma endregion

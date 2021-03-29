@@ -130,4 +130,14 @@ namespace LeetCode
     public:
         ListNode *getIntersectionNode(ListNode *headA, ListNode *headB);
     };
+
+    class Solution173
+    {
+        queue<int> m_numberQueue;
+        void TraverseTree(TreeNode* current);
+    public:
+        BSTIterator(TreeNode* root);
+        int next();
+        bool hasNext();
+    };
 }
