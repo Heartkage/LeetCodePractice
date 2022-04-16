@@ -14,6 +14,7 @@ public:
         int dp[t_length][s_length];
         memset(dp, 0, sizeof(dp));
 
+        // Pre-calculate if there is possible answer, because the question only has INT_MAX answers
         int answer = 0;
         for(int i = 0; i < t_length; i++)
         {
