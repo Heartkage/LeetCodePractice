@@ -6,31 +6,19 @@ using namespace std;
 class MyHashMap {
     int* map;
     int size;
-    int MAX_SIZE;
 
     void checkMapSize(int index)
     {
-        if(index >= size)
+        int* temp;
+        while(index >= size)
         {
+            temp = map;
             size -= 1;
-
-            int power = 1;
-            int remain = index / size;
-            while(remain > 0)
-            {
-                remain /= 10;
-                power++;
-            }
-
-            int* temp = map;
-            int previousSize = size;
-            size *= pow(10, power);
-            size = (size > MAX_SIZE) ? MAX_SIZE : size;
-
+            size *= 10;
             size += 1;
             map = new int[size];
             memset(map, -1, size*sizeof(int));
-            memcpy(map, temp, previousSize*sizeof(int));
+            memcpy(map, temp, ((size/10)+1)*sizeof(int));
         }
     }
 
@@ -46,7 +34,6 @@ class MyHashMap {
 
 public:
     MyHashMap() {
-        MAX_SIZE = 1000000;
         size = 11;
         map = new int[size];
         memset(map, -1, size*sizeof(int));
