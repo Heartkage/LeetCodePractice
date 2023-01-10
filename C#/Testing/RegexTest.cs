@@ -39,18 +39,3 @@ public class RegexTest
         return answer;
     }
 }
-
-public class Solution {
-    public bool WordBreak(string s, IList<string> wordDict) {
-        bool possible = true;
-        RegexTest test = new RegexTest();
-        Dictionary<string, List<int>> answer = test.FindAllAppearStrings(wordDict, s , out possible);
-
-        if(possible)
-        {
-            
-        }
-
-        return possible;
-    }
-}
