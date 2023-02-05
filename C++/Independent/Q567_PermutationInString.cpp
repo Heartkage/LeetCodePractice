@@ -5,7 +5,7 @@ using namespace std;
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
-        vector<int> character(26, -1);
+        vector<short> character(26, -1);
         int n = s1.size();
         for(int i = 0; i < n; i++){
             if(character[s1[i]-'a'] < 0)
@@ -25,13 +25,13 @@ public:
             else if(character[s2[i]-'a'] == 0){
                 int total = startIndex+counter;
                 for(int j = startIndex; j < total; j++){
-                    if(s2[j] == s2[i]){
-                        startIndex = j + 1;
-                        break;
-                    }
-                    else{
+                    if(s2[j] != s2[i]){
                         character[s2[j]-'a']++;
                         counter--;
+                    }
+                    else{
+                        startIndex = j + 1;
+                        break;
                     }
                 }
             }
