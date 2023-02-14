@@ -14,7 +14,7 @@ public:
         }
 
         bool hasCarry = false;
-        for(int i = 0; i < n; i++){
+        for(short i = 0; i < n; i++){
             if(i < m){
                 if(a[i]&1 && b[i]&1){
                     if(!hasCarry){
