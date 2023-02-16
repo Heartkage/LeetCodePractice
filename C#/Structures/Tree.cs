@@ -4,7 +4,7 @@ namespace Uitilities{
         public int val;
         public TreeNode left;
         public TreeNode right;
-        public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+        public TreeNode(int val=0, TreeNode left =null, TreeNode right=null) {
             this.val = val;
             this.left = left;
             this.right = right;
@@ -18,22 +18,23 @@ namespace Uitilities{
             for(int i = 0; i < _amount; i++){
                 int currentVal = 1;
                 Queue<TreeNode> treeQueue = new Queue<TreeNode>();
-                var rand = new System.Random();
-                for(int j = 0; j < Math.Pow(2, _depth-1); j++){
-                    int nextVal = _isSameVal ? currentVal : ((rand.Next()%2 == 0) ? currentVal : 87);
-                    TreeNode node = new TreeNode(nextVal);
-                    treeQueue.Enqueue(node);
-                    currentVal++;
+                if(_depth > 0){
+                    var rand = new System.Random();
+                    for(int j = 0; j < Math.Pow(2, _depth-1); j++){
+                        int nextVal = _isSameVal ? currentVal : ((rand.Next()%2 == 0) ? currentVal : 87);
+                        TreeNode node = new TreeNode(nextVal);
+                        treeQueue.Enqueue(node);
+                        currentVal++;
+                    }
+                    int n = treeQueue.Count;
+                    while(n > 1){
+                        TreeNode nodeL = treeQueue.Dequeue();
+                        TreeNode nodeR = treeQueue.Dequeue();
+                        TreeNode node = new TreeNode(currentVal++, nodeL, nodeR);
+                        treeQueue.Enqueue(node);
+                        n = treeQueue.Count;
+                    }
                 }
-                int n = treeQueue.Count;
-                while(n > 1){
-                    TreeNode nodeL = treeQueue.Dequeue();
-                    TreeNode nodeR = treeQueue.Dequeue();
-                    TreeNode node = new TreeNode(currentVal++, nodeL, nodeR);
-                    treeQueue.Enqueue(node);
-                    n = treeQueue.Count;
-                }
-                
                 if(treeQueue.Count == 1)
                     nodes.Add(treeQueue.Dequeue());
                 else

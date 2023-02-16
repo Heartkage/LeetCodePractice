@@ -13,7 +13,7 @@ namespace CSharp
     {
         static void Main(string[] args)
         {
-            Solved131();
+            Solved104();
         }
 
         static void Solve100(){
@@ -35,6 +35,15 @@ namespace CSharp
                 }
                 Console.WriteLine("");
             }
+        }
+
+        static void Solved104(){
+            TestTree test = new TestTree();
+            var heads = test.GenerateTestCase(1, 9);
+            test.PrintPreOrderTree(heads[0]);
+            Console.WriteLine("----Start----");
+            Solution104 s = new Solution104();
+            Console.WriteLine(s.MaxDepth(heads[0]));
         }
     }
 }
