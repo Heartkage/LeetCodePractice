@@ -35,28 +35,28 @@ public:
         int right = nums.size()-1;
         while(1){
             int mid = (left+right)/2;
-        if(mid == left){
-            if(left == 0)
-                ans = nums[left];
-            else if(nums[left] ^ nums[left-1])
-                ans = nums[left];
-            else
-                ans = nums[right];
-            break;
-        }
-        else if((right-mid) & 1){
-            if(nums[mid] == nums[mid+1])
-                right = mid - 1;
-            else
-                left = mid + 1;
-        }
-        else{
-            if(nums[mid] ^ nums[mid+1])
-                right = mid;
-            else{
-                left = mid + 1;
+            if(mid == left){
+                if(left == 0)
+                    ans = nums[left];
+                else if(nums[left] ^ nums[left-1])
+                    ans = nums[left];
+                else
+                    ans = nums[right];
+                break;
             }
-        }
+            else if((right-mid) & 1){
+                if(nums[mid] == nums[mid+1])
+                    right = mid - 1;
+                else
+                    left = mid + 1;
+            }
+            else{
+                if(nums[mid] ^ nums[mid+1])
+                    right = mid;
+                else{
+                    left = mid + 1;
+                }
+            }
         }
         return ans;
     }
