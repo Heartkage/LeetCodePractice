@@ -22,7 +22,9 @@ public:
 };
 
 int main(void){
-    ParkingSystem ps = new ParkingSystem(555, 6, 1000);
-    ps.addCar(1);
+    ParkingSystem* ps = new ParkingSystem(555, 0, 1000);
+    cout << ps->addCar(1) << endl;
+    cout << ps->addCar(2) << endl;
+    cout << ps->addCar(3) << endl;
     return 0;
 }
