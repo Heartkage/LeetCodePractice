@@ -10,7 +10,6 @@ public:
         int n3 = s3.length();
         if(n1 + n2 != n3)
             return false;
-
         vector<vector<bool> > dp(n1 + 1, vector<bool>(n2 + 1, false));
         dp[0][0] = true;
 
