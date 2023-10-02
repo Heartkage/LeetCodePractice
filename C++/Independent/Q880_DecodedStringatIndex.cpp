@@ -19,7 +19,7 @@ public:
         nums.push(wordGroup(1));
         bool lastIsDigit = true;
         int letterCount = 0;
-        int val = 0;
+        long long val = 0;
 
         // Part 1: building stack numbers
         for(int i = 0; i < s.length(); i++){
