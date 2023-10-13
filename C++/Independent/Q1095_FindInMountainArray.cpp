@@ -59,28 +59,20 @@ class Solution {
         else{
             int ans = -1;
             if(getValue(mid, ma) >= getValue(left, ma)){
-                if(getValue(mid-1, ma) < getValue(mid, ma)){
-                    if(left > min && t < getValue(left, ma))
-                        min = left;
-                    else if(t >= getValue(left, ma) && t < getValue(mid, ma))
+                if((mid-1 < left) || getValue(mid-1, ma) < getValue(mid, ma)){
+                    if(t >= getValue(left, ma) && t < getValue(mid, ma))
                         ans = recursiveSearch(ma, t, left, mid - 1);
                 }
                 else{
-                    if(mid < max && t > getValue(mid, ma))
-                        max = mid;
                     ans = recursiveSearch(ma, t, left, mid -1);
                 }
             }
             else if(left != right){
                 if(getValue(left, ma) > getValue(left+1, ma)){
-                    if(mid < max && t > getValue(mid, ma))
-                        max = mid;
-                    else if(t <= getValue(left, ma) && t > getValue(mid, ma))
+                    if(t <= getValue(left, ma) && t > getValue(mid, ma))
                         ans = recursiveSearch(ma, t, left, mid - 1);
                 }
                 else{
-                    if(mid < max && t > getValue(mid, ma))
-                        max = mid;
                     ans = recursiveSearch(ma, t, left, mid -1);
                 }
             }
@@ -93,14 +85,10 @@ class Solution {
             if(ans == -1){
                 if(getValue(mid, ma) >= getValue(right, ma)){
                     if(getValue(mid+1, ma) < getValue(mid, ma)){
-                        if(right < max && t < getValue(right, ma))
-                            max = right;
-                        else if(t < getValue(mid, ma) && t >= getValue(right, ma))
+                        if(t < getValue(mid, ma) && t >= getValue(right, ma))
                             ans = recursiveSearch(ma, t, mid + 1, right);
                     }
                     else{
-                        if(mid > min && t > getValue(mid, ma))
-                            min = mid;
                         ans = recursiveSearch(ma, t, mid + 1, right);
                     }
                 }
