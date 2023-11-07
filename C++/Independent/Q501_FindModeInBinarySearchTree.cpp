@@ -21,11 +21,7 @@ class Solution {
         recursiveSearch(ans, node->left);
         if(node->val == lastNum)
             count++;
-        else if(count == 0){
-            lastNum = node->val;
-            count = 1;
-        }
-        else if (count >= highestFrequency){
+        else if (count >= highestFrequency && count != 0){
             if(count > highestFrequency)
                 ans.clear();
             highestFrequency = count;
@@ -33,6 +29,11 @@ class Solution {
             lastNum = node->val;
             count = 1;
         }
+        else{
+            lastNum = node->val;
+            count = 1;
+        }
+
         recursiveSearch(ans, node->right);
     }
 public:
