@@ -6,9 +6,10 @@ public:
     int numberOfMatches(int n) {
         int matches = 0;
         while(n > 1){
+            bool hasExtra = (n & 1);
             n >>= 1;
             matches += n;
-            if(n & 1 && n ^ 1)
+            if(hasExtra)
                 n++;
         }
         return matches;
