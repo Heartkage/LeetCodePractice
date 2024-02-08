@@ -10,23 +10,20 @@ using namespace std;
 class Solution {
 public:
     int numSquares(int n) {
-        int m = sqrt(n);
-
         int dp[n+1];
-        for(int i = 1; i <= n; i++)
+        for(int i = 0; i <= n; i++)
             dp[i] = i;
 
+        int m = sqrt(n);
         for(int i = 2; i <= m; i++){
+            int s = i*i;
             for(int j = i*i; j <= n; j++){
-                int s = i*i;
                 int remainder = j % s;
                 int result = j / s;
 
                 dp[j] = min(dp[j], result + dp[remainder]);
             }
-            cout << dp[196] << endl;
         }
-
         return dp[n];
     }
 };
