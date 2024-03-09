@@ -69,97 +69,30 @@ public:
         vector<int> nonY(3, 0);
         vector<int> y(3, 0);
         int n = grid.size();
-        cout << n << endl;
+        int yCount = 0;
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 if(isY(j, i, n)){
                     y[grid[i][j]]++;
-                    cout << grid[i][j];
+                    yCount++;
                 }
-                else{
+                else
                     nonY[grid[i][j]]++;
-                    cout << grid[i][j];
-                }
             }
-            cout << endl;
         }
-        cout << endl;
 
-        int chosenNonYIndex = 0;
+        int minOperation = INT_MAX;
+        int nonYCount = n*n - yCount;
         for(int i = 0; i < 3; i++){
-            if(nonY[i] > nonY[chosenNonYIndex])
-                chosenNonYIndex = i;
-        }
-        int needNonYOperation = 0;
-        int completeNonY = 0;
-        cout << "Non-Y:" << endl;
-        for(int i = 0; i < 3; i++){
-            if(i == chosenNonYIndex)
-                completeNonY = nonY[i];
-            else
-                needNonYOperation += nonY[i];
-            cout << "i=" << i << ", " << nonY[i] << endl;
-        }
-        cout << endl;
-
-        cout << "Y:" << endl;
-        int chosenYIndex = 0;
-        for(int i = 0; i < 3; i++){
-            if(y[i] > y[chosenYIndex])
-                chosenYIndex = i;
-        }
-        int needYOperation = 0;
-        int completeY = 0;
-        for(int i = 0; i < 3; i++){
-            if(i == chosenYIndex)
-                completeY = y[i];
-            else
-                needYOperation += y[i];
-            cout << "i=" << i << ", " << y[i] << endl;
-        }
-        cout << endl;
-        
-        if(chosenNonYIndex != chosenYIndex){
-            return needNonYOperation + needYOperation;
-        }
-        else{
-            if(completeNonY > completeY){
-                chosenYIndex = chosenNonYIndex == 0 ? 1 : 0;
-                for(int i = 0; i < 3; i++){
-                    if(i == chosenNonYIndex)
-                        continue;
-                    
-                    if(y[i] > y[chosenYIndex])
-                        chosenYIndex = i;
-                }
-                needYOperation = 0;
-                for(int i = 0; i < 3; i++){
-                    if(i == chosenYIndex)
-                        completeY = y[i];
-                    else
-                        needYOperation += y[i];
-                }
+            for(int j = 0; j < 3; j++){
+                if(i == j)
+                    continue;
+                int operation = (yCount - y[i]) + (nonYCount - nonY[j]);
+                minOperation = min(minOperation, operation);
             }
-            else{
-                chosenNonYIndex = chosenYIndex == 0 ? 1 : 0;
-                for(int i = 0; i < 3; i++){
-                    if(i == chosenYIndex)
-                        continue;
-
-                    if(nonY[i] > nonY[chosenNonYIndex])
-                        chosenNonYIndex = i;
-                }
-                needNonYOperation = 0;
-                for(int i = 0; i < 3; i++){
-                    if(i == chosenNonYIndex)
-                        completeNonY = nonY[i];
-                    else
-                        needNonYOperation += nonY[i];
-                }
-            }
-            return needNonYOperation + needYOperation;
         }
 
+        return minOperation;
     }
 };
 
