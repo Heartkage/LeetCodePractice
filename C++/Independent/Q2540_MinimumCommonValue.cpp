@@ -9,7 +9,6 @@ public:
         int index2 = 0;
         int n = nums1.size();
         int m = nums2.size();
-        int maxSize = max(n, m);
         while(index1 < n && index2 < m){
             if(nums1[index1] < nums2[index2])
                 index1++;
@@ -17,23 +16,6 @@ public:
                 index2++;
             else
                 return nums1[index1];
-        }
-
-        if(index1 == n){
-            index1 -= 1;
-            while(index2 < maxSize){
-                if(nums1[index1] == nums2[index2])
-                    return nums1[index1];
-                index2++;
-            }
-        }
-        else{
-            index2 -= 1;
-            while(index1 < maxSize){
-                if(nums1[index1] == nums2[index2])
-                    return nums1[index1];
-                index1++;
-            }
         }
         return -1;
     }
