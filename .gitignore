@@ -3,3 +3,7 @@
 .idea
 *.iml
 out
+bin
+obj
+*.csproj
+*.dSYM
