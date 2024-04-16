@@ -1,4 +1,6 @@
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System;
 
 public class BasicCalculator {
 
@@ -206,8 +208,8 @@ public class BasicCalculator {
 
                             if (word == '-')
                             {
-                                // Exist a number in front, then add it as a negative value
-                                if (!isFirstNum)
+                                // Exist a number in front and no sign, then add it as a negative value
+                                if (!isFirstNum && !hasSign)
                                 {
                                     hasSign = true;
                                     signStack.Push('+');
@@ -284,19 +286,15 @@ public class BasicCalculator {
             else
                 answer = Math.Round(numberStack.Pop(), 6);
         }
-
-        numberStack = null;
-        signStack = null;
-        stoppingChar = null;
-        stoppingCharForPerentheses = null;
-
         return isValid;
     }
     
-    public int Calculate(string s) {
+    public double Calculate(string s) {
         
         Regex calculatorRx = new Regex(@"^[0-9xX \(\)\.\^\+\-\*/]+$", RegexOptions.Compiled);
         BasicStringCalculator(s, calculatorRx, 1, out double answer);
-        return (int)answer;
+        return answer;
     }
+
+    
 }
