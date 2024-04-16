@@ -9,7 +9,8 @@ private:
     {
         int pivot = _nums[_endIndex];
         int i = _startIndex - 1;
-
+        cout << "Pivot: " << pivot << endl;
+        cout << "currentVal: " << _nums[i+1] << endl;
         for(int j = _startIndex; j < _endIndex; j++)
         {
             if(_nums[j] <= pivot)
@@ -20,6 +21,7 @@ private:
         }
 
         int middleIndex = i+1;
+        cout << "currentVal: " << _nums[middleIndex] << endl;
         swap(_nums[middleIndex], _nums[_endIndex]);
 
         return middleIndex;
@@ -30,7 +32,7 @@ private:
         if(_startIndex < _endIndex)
         {
             int middleIndex = Partition(_nums, _startIndex, _endIndex);
-
+            cout << middleIndex << endl;
             QuickSort(_nums, _startIndex, middleIndex - 1);
             QuickSort(_nums, middleIndex + 1, _endIndex);
         }
@@ -40,7 +42,7 @@ public:
     int longestConsecutive(vector<int>& nums) {
         QuickSort(nums, 0, nums.size()-1);
 
-        for(auto i : nums)
+        for(int i = 0; i < nums.size(); i++)
             cout << nums[i] << " ";
         cout << endl;
 
@@ -71,7 +73,7 @@ public:
 
 int main()
 {
-    vector<int> nums = {0,3,7,2,5,8,4,6,0,1};
+    vector<int> nums = {4,2,1,3};
     Solution128 s;
 
     cout << s.longestConsecutive(nums) << endl;
