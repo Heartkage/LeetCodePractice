@@ -286,12 +286,6 @@ public class BasicCalculator {
             else
                 answer = Math.Round(numberStack.Pop(), 6);
         }
-
-        numberStack = null;
-        signStack = null;
-        stoppingChar = null;
-        stoppingCharForPerentheses = null;
-
         return isValid;
     }
     
