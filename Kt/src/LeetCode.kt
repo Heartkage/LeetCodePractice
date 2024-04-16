@@ -3,8 +3,8 @@ class TreeNode(var `val`: Int) {
     var right: TreeNode? = null
 }
 
-class Solution {
-    
+class Solution(capacity: Int) {
+
 }
 
 fun main() {
