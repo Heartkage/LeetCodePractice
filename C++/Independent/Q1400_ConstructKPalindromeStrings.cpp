@@ -16,16 +16,13 @@ public:
         }
         
         int minimumK = 0;
-        int maximumK = 0;
         for(int i = 0; i < 26; i++) {
-            maximumK += table[i];
             if(table[i] & 1) {
                 minimumK++;
-                maximumK++;
             }
         }
         
-        return k >= minimumK && k <= maximumK;
+        return k >= minimumK;
     }
 };
 
